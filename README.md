@@ -1,4 +1,4 @@
-# LFI Map Navigator 1.0.0 
+# LFI Map Navigator 1.0.0B 
 
 LFI Map Navigator is a manual & automated LFI navigator that can create a map of any directories and files you have visited or seen.
 
@@ -51,4 +51,7 @@ The extension enforces its configured URL scope before sending requests. Browser
 
 ## Release
 
-LFI Map Navigator 1.0.0 is the first official release. This bundle contains the Firefox extension runtime files, required Python native host, Linux installer, and this README.
+LFI Map Navigator 1.0.0B is the first official release. This bundle contains the Firefox extension runtime files, required Python native host, Linux installer, and this README.
+
+## Future Goals
+Fixing expand and collapse buttons, and a working JSON map file import. 
