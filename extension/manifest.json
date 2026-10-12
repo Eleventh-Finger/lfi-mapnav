@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "LFI Navigator - Native Traversal Transport",
+  "version": "1.0.0",
+  "description": "Traversal-preserving Firefox navigator using a Python Native Messaging transport for authorised CTF/lab targets.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "lfi-navigator@ctf-lab.local",
+      "strict_min_version": "121.0"
+    }
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "nativeMessaging",
+    "webNavigation"
+  ],
+  "action": {
+    "default_title": "LFI Navigator",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
+}

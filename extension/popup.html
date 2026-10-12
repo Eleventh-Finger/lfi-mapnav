@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LFI Navigator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>LFI Navigator</h1>
+  </div>
+</header>
+<main>
+  <section class="panel scope-panel">
+    <div class="panel-title"><h2>Tracking Scope</h2></div>
+    <label for="scopeUrlInput">Root website URL</label>
+    <div class="scope-row">
+      <input id="scopeUrlInput" placeholder="http://127.0.0" autocomplete="off" spellcheck="false">
+      <button id="useCurrentPageBtn">Use current page</button>
+      <button id="setScopeBtn" class="primary">Set root</button>
+    </div>
+    <div class="scope-actions">
+      <button id="clearScopeBtn">Clear root</button>
+      <button id="enableFetcherBtn">Enable scoped fetching</button>
+      <button id="disableFetcherBtn" hidden>Disable fetching</button>
+      <button id="fetchCurrentBtn">Fetch current page</button>
+      <span id="scopeStatus" class="scope-status">No website root configured.</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title"><h2>Navigation</h2></div>
+    <div class="navigation">
+      <button id="backBtn" title="Move to parent">←</button>
+      <div class="path-display">
+        <span class="path-label">Current virtual path</span>
+        <code id="currentPath">/</code>
+      </div>
+      <button id="forwardBtn" title="Send the path below exactly as entered">→</button>
+    </div>
+    <div class="navigation-entry">
+      <label for="navigationPathInput">Path to navigate</label>
+      <div class="token-row">
+        <input id="navigationPathInput" value="/" placeholder="/, ./, ../, ../../etc/passwd" autocomplete="off" spellcheck="false">
+        <button id="navigateInputBtn">→</button>
+      </div>
+      <small>Use literal path expressions such as <code>/</code>, <code>./</code>, <code>..</code>, <code>../</code>, or <code>../../foo</code>. Dot-segments are preserved for the native transport.</small>
+      <div class="request-options">
+        <div>
+          <label for="requestMethodInput">HTTP method</label>
+          <select id="requestMethodInput"><option value="GET">GET</option><option value="POST">POST</option><option value="PUT">PUT</option></select>
+        </div>
+        <div>
+          <label for="requestContentTypeInput">Body content type</label>
+          <input id="requestContentTypeInput" value="application/x-www-form-urlencoded" autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+      <label for="requestBodyInput">Request body (POST / PUT)</label>
+      <textarea id="requestBodyInput" rows="3" placeholder="key=value or raw request body"></textarea>
+      <small>GET sends no body. POST and PUT send the body above; the content type is configurable.</small>
+    </div>
+    <div class="request-status">
+      <span>Request state:</span>
+      <strong id="requestState">IDLE</strong>
+      <span id="requestedPath" hidden>/</span>
+      <span id="cacheState" hidden>UNKNOWN</span>
+    </div>
+    <div id="requestMessage" class="request-message" aria-live="polite"></div>
+  </section>
+
+  <input id="tokenInput" value="/" hidden>
+
+  <section class="panel">
+    <div class="panel-title"><h2>Memory Data Controls</h2></div>
+    <div class="button-row">
+      <button id="exportBtn">Export Memory</button>
+      <button id="importBtn">Import Memory</button>
+      <button id="clearMemoryBtn" class="danger">Clear Memory</button>
+    </div>
+    <input id="fileImport" type="file" accept=".json,application/json" hidden>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title"><h2>Memory</h2></div>
+    <div class="memory-stats">
+      <div class="memory-stat"><span id="fileCount" class="memory-number">0</span><span class="memory-label">Files</span></div>
+      <div class="memory-stat"><span id="directoryCount" class="memory-number">0</span><span class="memory-label">Directories</span></div>
+      <div class="memory-stat"><span id="potentialCount" class="memory-number">0</span><span class="memory-label">Potential</span></div>
+      <div class="memory-stat"><span id="discoveryCount" class="memory-number">0</span><span class="memory-label">Discoveries</span></div>
+    </div>
+    <div class="memory-info">
+      <div>Current: <code id="memoryCurrentDirectory">/</code></div>
+      <div>Last update: <span id="lastDiscovery">Never</span></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title"><h2>Virtual Filesystem</h2>
+      <div class="tree-actions"><button id="expandAllBtn">Expand</button><button id="collapseAllBtn">Collapse</button></div>
+    </div>
+    <div id="fileTree" class="file-tree"><div class="empty">No filesystem data discovered.</div></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title"><h2>Response Ingestion</h2></div>
+    <input id="responsePath" placeholder="Base directory path representing response...">
+    <textarea id="responseInput" placeholder="Paste target HTTP response logs here..."></textarea>
+    <div class="button-row">
+      <button id="ingestBtn" class="primary">Analyze & Ingest</button>
+      <button id="clearResponseBtn">Clear</button>
+    </div>
+    <div id="parseStatus" class="status"></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title"><h2>Latest Discovery</h2></div>
+    <div id="latestDiscovery" class="discovery-details">Nothing analyzed yet.</div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title"><h2>Navigation / Discovery History</h2></div>
+    <div id="discoveryHistory" class="history-list"><div class="empty">No history yet.</div></div>
+  </section>
+</main>
+<script src="popup.js"></script>
+</body>
+</html>
