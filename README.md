@@ -1,6 +1,6 @@
 # LFI Map Navigator 1.0.0 
 
-lfi-mapnav is a manual & automated LFI navigator that can create a map of any directories and files you have visited or seen
+LFI Map Navigator is a manual & automated LFI navigator that can create a map of any directories and files you have visited or seen.
 
 Note: This extension, python host and python host installer may only be used against systems you own or are explicitly authorised to test.
 
