@@ -1,4 +1,4 @@
-# LFI Map Navigator 1.0.0B 
+# LFI Map Navigator
 
 LFI Map Navigator is a manual & automated LFI navigator that can create a map of any directories and files you have visited or seen.
 
